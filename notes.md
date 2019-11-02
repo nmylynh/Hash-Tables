@@ -16,15 +16,16 @@
 
         Declare the array: [2, 3, 4, 5]
 
-- **Step 1, How big?**: An integer is 4 bytes, so the array needs to be 16-bytes because there's 4 integers.
-- **Step 2, Request memory space**: So we request 16 bytes from the computer.
-- **Step 3, Get the Address**: Once the operating system reserves that memory, it returns to us the address to the start of that reserved block.
-- **Step 4, Write Values**: And then we can put our values into that array. We can set our reserved memory to be `[2, 3, 4, 5]`
+1. **Step 1: How big?**: An integer is 4 bytes, so the array needs to be 16-bytes because there's 4 integers.
+2. **Step 2: Request memory space**: So we request 16 bytes from the computer.
+3. **Step 3: Get the Address**: Once the operating system reserves that memory, it returns to us the address to the start of that reserved block.
+4. **Step 4: Write Values**: And then we can put our values into that array. We can set our reserved memory to be `[2, 3, 4, 5]`
 
 #### How it looks like in memory:
 
 - The address of the memory block in on the top of the row (e.g. 25600).
-- You can see that there's 8 `1`'s or `0`'s. This is because there's 8 bits in one byte, as mentioned above. Therefore in memory we should see 16 blocks, which represents 16 bytes of memory alloted for our array.
+- You can see that there's 8 `1`'s or `0`'s. This is because there's 8 bits in one byte, as mentioned above; Therefore in memory we should see 16 blocks, which represents 16 bytes of memory alloted for our array.
+- So 25600 would be the 25600th block of memory, as you can imagine memory as a huge series of blocks.
 
 | 25600       | 25601       | 25602      | 25603      |
 |-------------|-------------|------------|------------|
