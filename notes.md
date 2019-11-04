@@ -105,8 +105,18 @@ Where:
 The code above would output:
 
 
-    [56, 88, 88, 88, 88, 120, 120, 120, 120, 184, 184, 184, 184, 184, 184, 184, 184, 256, 256, 256, 256, 256, 256, 256, 256, 256, 336, 336, 336, 336, 336, 336, 336, 336, 336, 336, 424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 520, 520, 520, 520, 520, 520, 520, 520, 520, 520, 520, 520, 632, 632, 632, 632, 632, 632, 632, 632, 632, 
-    632, 632, 632, 632, 632, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 904, 904, 904, 904, 904, 904, 904, 904, 904, 904, 904, 904]       
+    [56, 
+    88, 88, 88, 88, 
+    120, 120, 120, 120, 
+    184, 184, 184, 184, 184, 184, 184, 184, 
+    256, 256, 256, 256, 256, 256, 256, 256, 256, 
+    336, 336, 336, 336, 336, 336, 336, 336, 336, 336, 
+    424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 424, 
+    520, 520, 520, 520, 520, 520, 520, 520, 520, 520, 520, 520, 
+    632, 632, 632, 632, 632, 632, 632, 632, 632, 
+    632, 632, 632, 632, 632, 
+    760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 760, 
+    904, 904, 904, 904, 904, 904, 904, 904, 904, 904, 904, 904]       
 
 >The `sys` module has this neat function called `getsizeof()` which tells you how much memory each of these is occupying.
 
@@ -194,8 +204,56 @@ This is because you have hidden nested for loops when you add to the front becau
 
 # Hash Tables
 
->Hash tables are arguably the single most important data structure known to mankind. You absolutely **have** to know how they work. -"Get That Job at Google" by Steve Yegge
+>"Hash tables are arguably the single most important data structure known to mankind. You absolutely **have** to know how they work." -"Get That Job at Google" by Steve Yegge
 
 >Hash tables have the coveted property of constant time complexity for search, insertion, and deletion which no other data structure can match.
 
 ![data structure time complexity](https://i.imgur.com/Xg4VK5f.png "Time Complexity of Data Structures")
+
+## What are hash tables?
+
+### They're the data structure behind:
+1. Associative Arrays and Dictionaries
+2. Objects (Python, Javascript, Ruby)
+  - Hash tables are used to implement functionality underneath the hood behind the objects
+3. Caches
+    - Memcached, which does HTTP caching
+4. Dynamic Programming, Memoization
+
+## How do Hash Tables work?
+
+![data structure time complexity](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg/1200px-Hash_table_3_1_1_0_1_0_0_SP.svg.png "Hash Table")
+
+>Hash Tables are basically an implementation of key and value data storage and retrieval.
+
+Aforementioned, an array is a sequence of elements of the same type stored in a contiguous block of memory, which allows for constant time access.
+    - What that means is that each element of an array is right next to each other in memory.
+    - Which means that, if you want to get to the fifth element, all you have to do is multiply 5 times the size of your data, and then you can skip right there.
+
+**Steps:**
+1. A Hash table will take a key in any form, usually a string, 
+2. runs it through a hash function, which will change that key into an integer
+3. The integer is then run through a modulo function to make sure it's within a certain range, in the above case, `0 - 15`.
+4. John Smith is a string:
+   1. he gets run through a hash function 
+   2. he turns into a 2
+   3. and then the value associated with the john smith key gets put into this #2 bucket in the hash array
+5. Lisa smith the strong gets run through the hash function
+   1. it becomes 1
+   2. then 1 is where our value is stored
+
+**Pseudo-code:**
+
+    hash_table[Key] = Value;
+
+    // int index = hash_function(Key) % array.length;
+    // array[index] = Value;
+
+### What is a Hash Function?
+
+1. One-way mapping from arbitrary data to fixed data size and type
+2. There's many different hash functions with different attributes:
+   1. **Deterministic:** with the same input and the same function you'll always get the same output (cryptographic hashing)
+   2. **Uniform Distribution:** an input that's very close to another input will be on average, very very far away from the original input
+   3. **Non-invertible:** you cannot take the result of the hash function and reverse construct the input
+   4. **Continuous vs. non-continuous:** 
