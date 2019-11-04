@@ -192,4 +192,10 @@ This is because you have hidden nested for loops when you add to the front becau
    - Inserting an element in front of an array is still an O(n^2) operation
 3. Understanding arrays can make your code much more efficient!
 
+# Hash Tables
 
+>Hash tables are arguably the single most important data structure known to mankind. You absolutely **have** to know how they work. -"Get That Job at Google" by Steve Yegge
+
+>Hash tables have the coveted property of constant time complexity for search, insertion, and deletion which no other data structure can match.
+
+![data structure time complexity](https://i.imgur.com/Xg4VK5f.png "Time Complexity of Data Structures")
