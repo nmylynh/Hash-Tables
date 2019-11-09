@@ -366,6 +366,15 @@ The takeaway is that collisions are unavoidable. There isn't a way to avoid coll
 
 ### Hash Table Resizing
 
+>The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased. ... The expected number of entries in the map and its load factor should be taken into account when setting its initial capacity, so as to minimize the number of rehash operations.
+
+#### Resources
+
+1. [hashing and hash tables](https://www.ibrahimgabr.com/blog/2017/12/17/python-hashing-and-hash-tables)
+2. [load factor and rehashing](https://www.geeksforgeeks.org/load-factor-and-rehashing/)
+
+>The more elements you have to traverse down a linked list chain, the closer to that big-O of n you're going to hit--that's measured as the load factor.
+
 1. Load factor = (number of entries) / (hash table capacity)
 2. When load factor passes a certain threshold, resizing can occur
    1. create a new hash table with double capacity
@@ -373,5 +382,14 @@ The takeaway is that collisions are unavoidable. There isn't a way to avoid coll
    3. resizing is O(n) BUT occurs at O(log n) frequency
 
 
+1. In our basic hash table with no collision handling, we have a max load capacity of `1`. That means every single slot of the hash table is occupied-- so the total number of entries is equal to the total capacity.
 
+2. However, with linked list it's possible to have `load factor > 1`, since you can have every slot in the hash table full, but also have each slot contain multiple elements in a linked list chain.
 
+3. However, the longer our linked list get, the worse the performance the hash table gets. So in most high level languages, you would have a test or a check every time you do an insert, and when the load factor passes a certain threshold, like 0.7 like Java, it will resize the entire hash table.
+
+4. It will create an empty hash table double the size of the original hash table, and then copy over the elements one at a time. Each of the keys is re-hashed, and when everything is copied over, it will free all the memory from the original hash table.
+
+#### Time complexity
+
+1. Resizing is a O(n) since we have to copy over each element from the list, but since it occurs at a log(n) declining frequency, it still averages out to a constant time insert O(1).
