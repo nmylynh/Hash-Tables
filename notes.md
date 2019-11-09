@@ -329,9 +329,48 @@ The takeaway is that collisions are unavoidable. There isn't a way to avoid coll
 1. Open Addressing
 2. Linked List Chaining
 
+### Linked List Chaining
+1. Elements in the hash table are stored as linked lists
+   1. In each of these elements you store the key and the value and the pointer to the next value in the chain
+   2. If it's the only element, the pointer will be a null pointer which tells you that you've reached the end of a list
+   3. The general hash table methods still apply:
+      1. you take a key 
+      2. you run it through a hash function
+      3. based on that you get an index of an array
+      4. you use that index, in an insert case, to insert it into the appropriate bucket
+2. When retrieving a value, traverse down the linked list until you find the matching key
+   1. What changes here is that you don't have just one element in an array you might have a linked list, so in this (insert) case:
+      1. you need to traverse down the linked list to see if the key is already there
+      2. so if you have 3 elements in a linked list chain you need to traverse it to see if the key matches
+      3. if it doesn't, move onto the second,
+      4. then move onto third to `null` pointer, and then put it at the end of the linked list
+3. When you do see a matching key, with linked list you want to overwrite the value
+   1. So if found, overwrite
+   2. If not, add to end of linked list
 
+### Linked List Chaining Performance
 
+1. Time complexity is linear time since we need to go through each element of the linked list, and you have no information-- if it's the first, second or third element
+   1. Insert, delete, and search for linked lists are `O(n)`
+   2. In a worst case scenario, let's say you insert five keys and it all hashes to the same value
+      1. Then these insert, delete, and search elements would degrade from constant time complexity or O(1) to linear time complexity, or O(n)
+         1. Since you'll need to hit n elements in order to get down to the nth element of the linked list chain
+2. Linked lists also have some effect on space complexity
+   1. Instead of storing the value as you would in a normal array, you must store the key so you can check (when you're doing your linked list check) the value (which is the value that's stored), and also a pointer to the next entry
+      1. This is all extra overhead and it could take up to triple or even more space over a regular linked list without any chaining
+   2. Must store key, value, and pointer for each hash table entry
+   3. You may have a lot of empty slots
+      1. Worst case scenario--all five elements hashing to the same element
+      2. you may have a hash table with 128 slots but all the values are placed in one slot so your hash tables have 127 empty slots
+   4. To store n elements in a hash table it is still a O(n) no matter if your elements are all hashed to the same slot
 
+### Hash Table Resizing
+
+1. Load factor = (number of entries) / (hash table capacity)
+2. When load factor passes a certain threshold, resizing can occur
+   1. create a new hash table with double capacity
+   2. copy elements from the old hash table to the new one at a time
+   3. resizing is O(n) BUT occurs at O(log n) frequency
 
 
 
