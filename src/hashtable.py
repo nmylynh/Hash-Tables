@@ -38,7 +38,7 @@ class LinkedList(node):
             else:
                 current = current.get_next()
         if current is None:
-            raise ValueError("Data not in list.")
+            return False
         return current
 
 class HashTable:
@@ -88,8 +88,15 @@ class HashTable:
         '''
         index = self._hash_mod(key)
 
-        if self.storage[index]:
-            pass
+        if self.storage[index] == None:
+            self.storage[index] = LinkedList()
+            self.storage[index].insert(key, value)
+        else:
+            check = self.storage[index].search(key)
+            if check:
+                check.value = value
+            else:
+                self.storage[index].insert(key, value)
 
         
     def remove(self, key):
