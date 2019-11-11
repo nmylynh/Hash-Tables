@@ -7,6 +7,40 @@ class LinkedPair:
         self.value = value
         self.next = None
 
+    def get_node(self):
+        return self
+
+    def get_key(self):
+        return self.key
+
+    def get_next(self):
+        return self.next
+
+    def set_next(self, new_next):
+        self.next = new_next
+
+class LinkedList(node):
+    def __init__(self, head=None):
+        self.head = head
+
+    def insert(self, key, value):
+        new_node = LinkedPair(key, value)
+        new_node.set_next(self.head)
+        self.head = new_node
+
+    def search(self, key):
+        current = self.head
+        found = False
+        
+        while current and found is False:
+            if current.get_key() == key:
+                found = True
+            else:
+                current = current.get_next()
+        if current is None:
+            raise ValueError("Data not in list.")
+        return current
+
 class HashTable:
     '''
     A hash table that with `capacity` buckets
@@ -23,7 +57,8 @@ class HashTable:
 
         You may replace the Python hash with DJB2 as a stretch goal.
         '''
-        return key % len(self.storage)
+        hashed_key = hash(key)
+        return hashed_key
 
 
     def _hash_djb2(self, key):
@@ -51,10 +86,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
 
+        if self.storage[index]:
+            pass
 
-
+        
     def remove(self, key):
         '''
         Remove the value stored with the given key.
