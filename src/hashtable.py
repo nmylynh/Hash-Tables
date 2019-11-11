@@ -100,9 +100,9 @@ class HashTable:
         index = self._hash_mod(key)
 
         if self.storage[index]:
-            node_key = self.storage[index].search(key)
-            if node_key:
-                node_key.value = None
+            node = self.storage[index].search(key)
+            if node:
+                node.value = None
         else:
             raise ValueError("Key is not found.")
 
